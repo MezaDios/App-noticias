@@ -1,42 +1,43 @@
 <div class="col-12 text-center">
   <div class="card shadow">
-    <form class="card-body" (ngSubmit)="app.addNew(model);">
+    <form class="card-body" #newForm="ngForm" (ngSubmit)="addNew(newForm)">
       <div class="card-header mb-2">
         <h1>Nueva Noticia</h1>
       </div>
       <div class="card-body">
 
         <div class="form-group">
-          <input [(ngModel)]="model.title" type="text" name="title" class="form-control" placeholder="Title" required />
+          <input #title="ngModel" [(ngModel)]="model.selectedNew.title" type="text" name="title" class="form-control"
+            placeholder="Title" required />
         </div>
 
         <div class="form-group">
-          <textarea #description [(ngModel)]="model.description" name="description" class="form-control"
-            placeholder="Descripcion" required></textarea>
+          <textarea #description="ngModel" [(ngModel)]="model.selectedNew.description" name="description"
+            class="form-control" placeholder="Descripcion" required></textarea>
         </div>
 
         <div class="form-group">
           <div class="custom-file">
-            <input #image [(ngModel)]="model.image" type="file" name="image" class="custom-file-input" accept="image/*"
-              id="validatedCustomFile" required />
+            <input #image="ngModel" [(ngModel)]="model.selectedNew.image" type="file" name="image"
+              class="custom-file-input" accept="image/*" id="validatedCustomFile" required />
             <label class="custom-file-label" for="validatedCustomFile">Elegir imagen...</label>
             <div class="invalid-feedback">Example invalid custom file feedback</div>
           </div>
         </div>
 
         <div class="form-group">
-          <input #author [(ngModel)]="model.author" type="text" name="author" class="form-control" placeholder="Autor"
-            required />
+          <input #author="ngModel" [(ngModel)]="model.selectedNew.author" type="text" name="author" class="form-control"
+            placeholder="Autor" required />
         </div>
 
         <div class="form-group">
-          <input #place [(ngModel)]="model.place" type="text" name="place" class="form-control" placeholder="Lugar"
-            required />
+          <input #place="ngModel" [(ngModel)]="model.selectedNew.place" type="text" name="place" class="form-control"
+            placeholder="Lugar" required />
         </div>
 
         <div class="form-group">
-          <input #date [(ngModel)]="model.date" type="date" name="date" class="form-control" placeholder="Fecha"
-            required />
+          <input #date="ngModel" [(ngModel)]="model.selectedNew.date" type="date" name="date" class="form-control"
+            placeholder="Fecha" required />
         </div>
 
       </div>

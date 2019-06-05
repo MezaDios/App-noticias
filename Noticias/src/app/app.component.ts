@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { news } from '../news.json';
-// import fs from 'fs';
+import { Component, OnInit } from '@angular/core';
+import { NewService } from './services/new.service';
+import { New } from 'src/app/models/New.model';
+
 
 @Component({
   selector: 'app-root',
@@ -8,52 +9,25 @@ import { news } from '../news.json';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
-  title: string;
-  news: Array<object>;
-  currentNew;
+export class AppComponent implements OnInit {
 
-  constructor() {
-    this.news = news;
+  public news: New[];
+  constructor(private model: NewService) {
+    this.news = [];
   }
 
-  set News(News: Array<object>) {
-    this.news = News;
+  getNews() {
+    this.model.getNews()
+      .subscribe(res => {
+        console.log(this.news);
+
+        this.news = res as New[];
+
+        console.log(this.news);
+      });
   }
 
-  get News() {
-    return this.news;
+  ngOnInit() {
+    this.getNews();
   }
-
-  addNew(New: object) {
-    this.news.push(New);
-    // updateJSON();
-  }
-
-  deleteNew(index: number) {
-    if (window.confirm('Estás seguro de eliminar la noticia?')) {
-      const array: Array<object> = [];
-      for (let i = 0; i < this.news.length; i++) {
-        if (i !== index) {
-          array.push(this.news[i]);
-        }
-      }
-      this.News = array;
-
-      // updateJSON();
-    }
-  }
-
-  updateNew(index: number, New: object) {
-    this.News[index] = New;
-    // updateJSON();
-  }
-
-  /*updateJSON() {
-    fs.writeFile('../news.json', JSON.stringify(this.news), (err) => {
-      if (err) {
-        console.log(`Error: ${err}`);
-      }
-    });
-  }*/
 }

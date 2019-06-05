@@ -7,13 +7,16 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  @Input() numero: number;
+  @Input() num: number;
 
   constructor() {
   }
 
   ngOnInit() {
+  }
 
+  updateNum(num: number) {
+    this.num = num;
   }
 
 }
